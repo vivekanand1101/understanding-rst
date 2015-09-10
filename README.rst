@@ -42,14 +42,14 @@ version will be placed in the Fedora Infrastructure yum repository for testing
 within Infrastructure before being released to the general public.  Installing
 from the yum repository should be as easy as::
 
-	# yum install python-fedora
+	 $ yum install python-fedora
 
 If you want to install from a checkout of the development branch, follow these
 procedures::
 
-    # git clone https://github.com/fedora-infra/python-fedora.git
-    # cd python-fedora
-    # ./setup.py install
+     $ git clone https://github.com/fedora-infra/python-fedora.git
+     $ cd python-fedora
+     $ ./setup.py install
 
 See the configuration notes in each section for information on configuring
 your application after install.
@@ -220,76 +220,89 @@ Release
 
 1. Checkout a copy of the repository and setup git flow::
 
-        ``git clone https://github.com/fedora-infra/python-fedora.git``
-        ``cd python-fedora``
-        ``git flow init``
+          git clone https://github.com/fedora-infra/python-fedora.git
+          cd python-fedora
+          git flow init
 
 2. Create a release branch for all of our work::
 
-        ``git flow release start $VERSION``
+          git flow release start $VERSION
 
 3. Download new translations and verify they are valid by compiling them::
   
-        ``zanata-cli pull``
-        ``python releaseutils.py build_catalogs``
-        ``# If everything checks out``
-        ``git commit -m 'Merge new translations from fedora.zanata.org'``
+          zanata-cli pull
+          python releaseutils.py build_catalogs
+          # If everything checks out
+          git commit -m 'Merge new translations from fedora.zanata.org'
 
 4. Make sure that the NEWS file is accurate (use `git log` if needed).
 
 5. Update python-fedora.spec and fedora/release.py with the new version
    information.::
-     ``#Make edits to python-fedora.spec and release.py``
-     ``git commit``
+
+         #Make edits to python-fedora.spec and release.py
+         git commit
 
 6. Make sure the docs are proper and publish them::
-     # Build docs and check for errors
-     python setup.py build_sphinx
-     # pypi
-     python setup.py upload_docs
+
+         # Build docs and check for errors
+         python setup.py build_sphinx
+         # pypi
+         python setup.py upload_docs
 
 7. Push the release branch to the server::
-     # Update files
-     git flow release publish $VERSION
+
+        # Update files
+        git flow release publish $VERSION
 
 8. Go to a temporary directory and checkout a copy of the release::
-     cd ..
-     git clone git@github.com:fedora-infra/python-fedora.git release
-     cd release
-     git checkout release/$VERSION
+     
+        cd ..
+        git clone git@github.com:fedora-infra/python-fedora.git release
+        cd release
+        git checkout release/$VERSION
 
 9. Create the tarball in this clean checkout::
-     python setup.py sdist
+
+        python setup.py sdist
 
 10. copy the dist/python-fedora-VERSION.tar.gz and python-fedora.spec files to
     where you build Fedora RPMS.  Do a test build::
-     cp dist/python-fedora-*.tar.gz python-fedora.spec /srv/git/python-fedora/
-     pushd /srv/git/python-fedora/
-     fedpkg switch-branch master
-     make mockbuild
+
+        cp dist/python-fedora-*.tar.gz python-fedora.spec /srv/git/python-fedora/
+        pushd /srv/git/python-fedora/
+        fedpkg switch-branch master
+        make mockbuild
 
 11. Make sure the build completes.  Run rpmlint on the results.  Install and
     test the new packages::
-     rpmlint *rpm
-     sudo rpm -Uvh *noarch.rpm
+
+        rpmlint *rpm
+        sudo rpm -Uvh *noarch.rpm
+
      [test]
 
 12. When satisfied that the build works, create a fresh tarball and upload to
     pypi::
-     popd   # Back to the release directory
-     python setup.py sdist upload --sign
+
+        popd   # Back to the release directory
+        python setup.py sdist upload --sign
 
 13. copy the same tarball to fedorahosted.  The directory to upload to is
     slightly different for fedorahosted admins vs normal fedorahosted users:
     Admin::
-      scp dist/python-fedora*tar.gz* fedorahosted.org:/srv/web/releases/p/y/python-fedora/
+
+        scp dist/python-fedora*tar.gz* fedorahosted.org:/srv/web/releases/p/y/python-fedora/
+
     Normal contributor::
-      scp dist/python-fedora*tar.gz* fedorahosted.org:python-fedora
+
+        scp dist/python-fedora*tar.gz* fedorahosted.org:python-fedora
 
 14. mark the release as finished in git::
-     cd ../python-fedora
-     git flow release finish $VERSION
-     git push --all
-     git push --tags
+
+        cd ../python-fedora
+        git flow release finish $VERSION
+        git push --all
+        git push --tags
 
 15. Finish building and pushing packages for Fedora.
