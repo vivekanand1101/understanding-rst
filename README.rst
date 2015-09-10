@@ -219,18 +219,21 @@ Release
    develop branch.
 
 1. Checkout a copy of the repository and setup git flow::
-     ``git clone https://github.com/fedora-infra/python-fedora.git
-       cd python-fedora
-       git flow init``
+
+        ``git clone https://github.com/fedora-infra/python-fedora.git``
+        ``cd python-fedora``
+        ``git flow init``
 
 2. Create a release branch for all of our work::
-     ``git flow release start $VERSION``
+
+        ``git flow release start $VERSION``
 
 3. Download new translations and verify they are valid by compiling them::
-     ``zanata-cli pull``
-     ``python releaseutils.py build_catalogs``
-     ``# If everything checks out``
-     ``git commit -m 'Merge new translations from fedora.zanata.org'``
+  
+        ``zanata-cli pull``
+        ``python releaseutils.py build_catalogs``
+        ``# If everything checks out``
+        ``git commit -m 'Merge new translations from fedora.zanata.org'``
 
 4. Make sure that the NEWS file is accurate (use `git log` if needed).
 
