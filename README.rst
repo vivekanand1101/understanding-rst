@@ -282,8 +282,6 @@ Release
         rpmlint *rpm
         sudo rpm -Uvh *noarch.rpm
 
-     [test]
-
 12. When satisfied that the build works, create a fresh tarball and upload to
     pypi::
 
