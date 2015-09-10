@@ -219,9 +219,9 @@ Release
    develop branch.
 
 1) Checkout a copy of the repository and setup git flow::
-     ``git clone https://github.com/fedora-infra/python-fedora.git``
-     ``cd python-fedora``
-     ``git flow init``
+     ``git clone https://github.com/fedora-infra/python-fedora.git`` ::
+     ``cd python-fedora`` ::
+     ``git flow init`` ::
 
 2) Create a release branch for all of our work::
      git flow release start $VERSION
