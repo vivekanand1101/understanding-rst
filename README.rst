@@ -215,15 +215,15 @@ releaseutils.py --help`` for details.
 Release
 =======
 
-Commit all features, hotfixes, etc that you want in the release into the
+0. Commit all features, hotfixes, etc that you want in the release into the
    develop branch.
 
-Checkout a copy of the repository and setup git flow::
-     ``git clone https://github.com/fedora-infra/python-fedora.git`` 
-     ``cd python-fedora`` 
-     ``git flow init`` 
+1. Checkout a copy of the repository and setup git flow::
+     git clone https://github.com/fedora-infra/python-fedora.git 
+     cd python-fedora 
+     git flow init
 
-Create a release branch for all of our work::
+2. Create a release branch for all of our work::
      git flow release start $VERSION
 
 3. Download new translations and verify they are valid by compiling them::
