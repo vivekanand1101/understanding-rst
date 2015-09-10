@@ -143,10 +143,12 @@ Building the docs
 =================
 
 You'll need to install python-sphinx for this::
-  yum install python-sphinx
+  
+    yum install python-sphinx
 
 Then run this command::
-  python setup.py build_sphinx
+  
+    python setup.py build_sphinx
 
 
 Translations
