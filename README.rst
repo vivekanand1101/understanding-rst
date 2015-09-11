@@ -17,8 +17,7 @@ services much easier.
 .. contents::
 
 
-License
-=======
+                                //License//
 
 This python module is distributed under the terms of the GNU Lesser General
 Public License Version 2 or later.
@@ -217,16 +216,16 @@ releaseutils.py --help`` for details.
 Release
 =======
 
-0. Commit all features, hotfixes, etc that you want in the release into the
+~  Commit all features, hotfixes, etc that you want in the release into the
    develop branch.
 
-1. Checkout a copy of the repository and setup git flow::
+~  Checkout a copy of the repository and setup git flow::
 
           git clone https://github.com/fedora-infra/python-fedora.git
           cd python-fedora
           git flow init
 
-2. Create a release branch for all of our work::
+~  Create a release branch for all of our work::
 
           git flow release start $VERSION
 
